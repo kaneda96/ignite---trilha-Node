@@ -1,4 +1,3 @@
-import { Category } from "../model/CategoryModel";
 import { ICategoryRepository } from "../repositories/ICategoryRepository";
 
 
