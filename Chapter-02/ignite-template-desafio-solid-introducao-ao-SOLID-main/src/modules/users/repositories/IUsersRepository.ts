@@ -6,6 +6,7 @@ interface ICreateUserDTO {
 }
 
 interface IUsersRepository {
+  // eslint-disable-next-line prettier/prettier
   create({ name, email }: ICreateUserDTO): User;
   findById(id: string): User | undefined;
   findByEmail(email: string): User | undefined;

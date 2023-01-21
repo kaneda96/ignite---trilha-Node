@@ -7,10 +7,20 @@ interface IRequest {
 }
 
 class CreateUserUseCase {
-  constructor(private usersRepository: IUsersRepository) {}
+
+  // eslint-disable-next-line prettier/prettier
+  constructor(private usersRepository: IUsersRepository) {
+
+  }
 
   execute({ email, name }: IRequest): User {
-    
+
+    const emailTakenUser = this.usersRepository.findByEmail(email);
+    if (emailTakenUser) {
+      throw new Error('email already taken!');
+    }
+    const user = this.usersRepository.create({ name, email });
+    return user;
   }
 }
 
