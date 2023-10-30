@@ -1,28 +1,13 @@
 import { Router } from "express";
-import { createSpecificationController } from "../modules/cars/useCases/createSpecification";
+import { CreateSpecificationController } from "../modules/cars/useCases/createSpecification/CreateSpecificationController";
+import { ensureAuthenticated } from "../middleware/ensureAuthenticated";
 
 const specificationRoutes = Router();
 
 
+const createSpecificationController = new CreateSpecificationController();
 
-specificationRoutes.get("/", (request, response) => {
-
-  return response.status(200).json();
-
-});
-
-specificationRoutes.post("/", (request, response) => {
-
-  const { name, description } = request.body;
-
-  createSpecificationController.handle(request, response)
-
-  return response.status(201).send({ message: 'created' });
-});
-
-
-
-
-
+specificationRoutes.use(ensureAuthenticated)
+specificationRoutes.post("/", createSpecificationController.handle);
 
 export { specificationRoutes }

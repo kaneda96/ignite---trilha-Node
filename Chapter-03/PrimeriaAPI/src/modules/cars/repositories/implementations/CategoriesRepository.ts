@@ -1,14 +1,15 @@
 import { Repository } from "typeorm";
 import { Category } from "../../entities/CategoryModel";
 import { PostgresDataSource } from "../../../../database/index";
-import { ICategoryRepository, ICategoryDTO } from "../ICategoryRepository";
+import { ICategoriesRepository, ICategoryDTO } from "../ICategoriesRepository";
 
 
 
-class CategoryRepository implements ICategoryRepository {
+class CategoriesRepository implements ICategoriesRepository {
   private categoryRepository: Repository<Category>;
 
   constructor() {
+
     this.categoryRepository = PostgresDataSource.getRepository(Category)
   }
 
@@ -34,4 +35,4 @@ class CategoryRepository implements ICategoryRepository {
 
 }
 
-export { CategoryRepository }
+export { CategoriesRepository }

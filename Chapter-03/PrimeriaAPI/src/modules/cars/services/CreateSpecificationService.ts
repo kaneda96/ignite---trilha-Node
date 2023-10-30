@@ -1,3 +1,4 @@
+import { AppError } from "../../../errors/AppErrors";
 import { ISpecificationRepository } from "../repositories/ISpecificationRepository";
 
 
@@ -15,7 +16,7 @@ class CreateSpecificationService {
     const categoryAlreadyExists = this.specificationRepository.findByName(name);
 
     if (categoryAlreadyExists) {
-      throw new Error('Category already exists!');
+      throw new AppError('Category already exists!', 409);
     }
     this.specificationRepository.create({ name, description });
   }
