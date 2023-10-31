@@ -1,4 +1,5 @@
 import { DataSource } from "typeorm"
+import { User } from "../modules/accounts/entities/UserModel"
 
 const PostgresDataSource = new DataSource({
   type: "postgres",
@@ -11,6 +12,7 @@ const PostgresDataSource = new DataSource({
   entities: ["./src/modules/**/entities/*.ts"],
   migrations: ["./src/database/migrations/*.ts"],
 })
+
 
 PostgresDataSource.initialize()
   .then(() => {

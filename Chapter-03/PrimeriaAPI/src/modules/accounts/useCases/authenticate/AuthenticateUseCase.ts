@@ -28,11 +28,12 @@ class AuthenticateUserUseCase {
 
 
   async execute({ email, password }: IRequest): Promise<IResponse> {
-    const user = await this.usersRepository.findByEmail(email)
+    try {
+      const user = await this.usersRepository.findByEmail(email)
     if (!user)
       throw new AppError("User password or email is incorret!", 401)
 
-    const isPasswordCorrect = bcrypt.compare(password, user.password);
+    const isPasswordCorrect = await bcrypt.compare(password, user.password);
 
     if (!isPasswordCorrect)
       throw new AppError("User password or email is incorret!", 401)
@@ -43,6 +44,9 @@ class AuthenticateUserUseCase {
     })
 
     return { user, token };
+    } catch (error) {
+      throw error;
+    }    
 
   }
 

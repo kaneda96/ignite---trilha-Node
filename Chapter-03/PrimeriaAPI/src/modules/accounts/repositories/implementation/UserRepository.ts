@@ -13,12 +13,12 @@ class UserRepository implements IUserRepository {
   constructor() {
     this.userRepository = PostgresDataSource.getRepository(User)
   }
-  findById(id: string): Promise<User> {
-    const user = this.userRepository.findOne({ where: { id: id } })
+  async findById(id: string): Promise<User> {
+    const user = await this.userRepository.findOne({ where: { id: id } })
     return user;
   }
-  findByEmail(email: string): Promise<User> {
-    const user = this.userRepository.findOne({ where: { email: email } })
+  async findByEmail(email: string): Promise<User> {
+    const user = await this.userRepository.findOne({ where: { email: email } })
     return user;
   }
 
@@ -27,7 +27,7 @@ class UserRepository implements IUserRepository {
     await this.userRepository.save(user);
   }
   async turnAdmin(id: string): Promise<void> {
-    throw new Error("Method not implemented.");
+    await this.userRepository.update(id,{isAdmin: true});
   }
 
 

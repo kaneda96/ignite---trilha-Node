@@ -17,10 +17,6 @@ export class createUser1685478539322 implements MigrationInterface {
                         type: "varchar",
                     },
                     {
-                        name: "username",
-                        type: "varchar",
-                    },
-                    {
                         name: "email",
                         type: "varchar",
                     },
@@ -42,9 +38,10 @@ export class createUser1685478539322 implements MigrationInterface {
                         type: "timestamp",
                         default: "now()"
                     }
-                ]
+                ],                
+
             })
-        )
+        )        
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
