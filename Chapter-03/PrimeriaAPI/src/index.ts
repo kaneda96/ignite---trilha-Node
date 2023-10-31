@@ -7,7 +7,7 @@ import swaggerFile from "./swagger.json";
 
 import "./database";
 import "./shared/container";
-import { AppError } from "./errors/AppErrors";
+import { AppError } from "./Errors/AppError";
 
 const app = express();
 
@@ -21,7 +21,7 @@ app.use((err: Error, request: Request, response: Response, next: NextFunction) =
   if (err instanceof AppError) {
     return response.status(err.statusCode).send({ message: err.message })
   }
-  return response.status(500).send({ message: err.message })
+  return response.status(500).json({status: 500, message: `Internal erver Error - ${err.message}` })
 })
 
 app.listen(3333, () => console.log("server running on 3333!"));

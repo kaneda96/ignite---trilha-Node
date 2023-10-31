@@ -1,7 +1,7 @@
 import { inject, injectable } from "tsyringe"
 import bcrypt from "bcrypt";
 import { IUserRepository } from "../repositories/IUserRepository"
-import { AppError } from "../../../errors/AppErrors";
+import { AppError } from "../../../Errors/AppError";
 
 interface IRequest {
   name: string;

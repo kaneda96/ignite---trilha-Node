@@ -1,4 +1,4 @@
-import { AppError } from "../../../errors/AppErrors";
+import { AppError } from "../../../Errors/AppError";
 import { ICategoriesRepository } from "../repositories/ICategoriesRepository";
 
 

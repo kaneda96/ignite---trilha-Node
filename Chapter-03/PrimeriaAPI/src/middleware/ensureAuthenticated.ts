@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import { verify } from "jsonwebtoken";
 import { UserRepository } from "../modules/accounts/repositories/implementation/UserRepository";
-import { AppError } from "../errors/AppErrors";
+import { AppError } from "../Errors/AppError";
 
 
 export async function ensureAuthenticated(request: Request, response: Response, next: NextFunction) {
@@ -25,7 +25,6 @@ export async function ensureAuthenticated(request: Request, response: Response, 
     next();
   } catch (error) {
     throw new AppError("invalid token!", 401);
-
   }
 
 }

@@ -1,12 +1,13 @@
 {
-  "name": "projetoCapitulo03",
+  "name": "rentx",
   "version": "1.0.0",
   "main": "index.js",
   "author": "Bruno Ferrari <kanedaferrari@yahoo.com.br>",
   "license": "MIT",
   "scripts": {
-    "dev": "ts-node-dev --inspect --transpile-only --ignore-watch node_modules --respawn src/server.ts",
+    "dev": "ts-node-dev --inspect --transpile-only --ignore-watch node_modules --respawn src/index.ts",
     "start": "ts-node src/index.ts",
+    "build": "tsc",
     "typeorm": "ts-node-dev ./node_modules/typeorm/cli",
     "typeorm:run-migrations": "npm run typeorm migration:run -- -d ./src/database/index.ts",
     "typeorm:generate-migration": "npm run typeorm -- -d ./typeOrm.config.ts migration:generate ./migrations/$npm_config_name",

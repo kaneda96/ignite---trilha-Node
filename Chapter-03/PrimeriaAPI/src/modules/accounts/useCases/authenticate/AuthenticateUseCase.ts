@@ -2,7 +2,7 @@ import { inject, injectable } from "tsyringe";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken"
 import { IUserRepository } from "../../repositories/IUserRepository";
-import { AppError } from "../../../../errors/AppErrors";
+import { AppError } from "../../../../Errors/AppError";
 
 interface IRequest {
   email: string;
