@@ -1,10 +1,9 @@
 import { Repository } from "typeorm";
-import { IUserDTO, IUserRepository } from "../IUserRepository";
+import { IUserRepository } from "../IUserRepository";
 import { PostgresDataSource } from "../../../../database/index";
 import { User } from "../../entities/UserModel";
-
-
-
+import { ICreateUserDTO } from "../../dtos/ICreateUserDTO";
+import { deleteFile } from "../../../../utils/file";
 
 class UserRepository implements IUserRepository {
 
@@ -13,7 +12,16 @@ class UserRepository implements IUserRepository {
   constructor() {
     this.userRepository = PostgresDataSource.getRepository(User)
   }
-  async findById(id: string): Promise<User> {
+  async updateAvatar(id: string, avatarFile: string) {
+    const user = await this.findById(id);
+    
+    if(user.avatar){
+      await deleteFile(`./tmp/avatar/${user.avatar}`);
+    }   
+    user.avatar = avatarFile;
+    await this.userRepository.update(user.id, {avatar: avatarFile});
+  }
+  async findById(id: string): Promise<User> {8
     const user = await this.userRepository.findOne({ where: { id: id } })
     return user;
   }
@@ -22,15 +30,13 @@ class UserRepository implements IUserRepository {
     return user;
   }
 
-  async create({ name, email, password, driver_license }: IUserDTO): Promise<void> {
+  async create({ name, email, password, driver_license }: ICreateUserDTO): Promise<void> {
     const user = this.userRepository.create({ name, email, password, driver_license });
     await this.userRepository.save(user);
   }
   async turnAdmin(id: string): Promise<void> {
     await this.userRepository.update(id,{isAdmin: true});
   }
-
-
 }
 
 export { UserRepository }

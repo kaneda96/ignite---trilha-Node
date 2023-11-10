@@ -9,13 +9,13 @@ export class User {
   @Column()
   name: string;
   @Column()
-  username: string;  
-  @Column()
   password: string;
   @Column()
   email: string;
   @Column()
   driver_license: string;
+  @Column({nullable: true})
+  avatar: string;
   @Column({ default: false })
   isAdmin: boolean;
   @CreateDateColumn({
